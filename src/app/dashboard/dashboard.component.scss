@@ -1,0 +1,108 @@
+.dashboard {
+    margin: 0 auto;
+    background-color: #F2F2F2;
+    overflow: hidden;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.records-card-container {
+    visibility: hidden;
+    height: 0;
+}
+
+.student-card, .subject-card, .chart-card, .record-card {
+    width: 400px;
+    margin: 10px;
+}
+
+.no-record-card {
+    width: 400px;
+    margin: 30px auto;
+}
+
+.student-list, .subject-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.pill {
+    border: 1px solid #d1d1d1;
+    background-color: #f1f1f1;
+    padding: 3px;
+    border-radius: 2px;
+    color: #3366FE;
+    font-size: 12px;
+    font-weight: bolder;
+}
+
+.record-table-container {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table {
+    width: 80%;
+}
+
+.record-card-data {
+    padding: 20px;
+}
+mat-card-content {
+    padding: 10px;
+}
+mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.records-table-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.export-button {
+    margin-left: 50px;
+    margin-bottom: 16px;
+}
+
+@media only screen and (max-width: 960px) {
+    .record-table-container {
+        visibility: hidden;
+        height: 0px;
+    }
+
+    .records-card-container {
+        visibility: visible;
+        height: auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .student-card, .subject-card, .chart-card, .record-card {
+        width: 80vw;
+        margin: 10px auto;
+    }
+
+}

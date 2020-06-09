@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-title>New Subject</mat-card-title>
+
+    <mat-form-field>
+        <mat-label>Subject Name</mat-label>
+        <input required matInput type="text" placeholder="Math" [(ngModel)]="name">
+    </mat-form-field>
+
+    <br><br>  
+
+    <mat-checkbox [(ngModel)]="isCore" [checked]="true">Core Subject?</mat-checkbox>
+
+    <br><br>
+
+    <button [disabled]="!this.name" mat-raised-button color="accent" (click)="submit()">Save</button>
+
+    <br><br>
+
+    <p>{{ message }}</p>
+
+</mat-card>

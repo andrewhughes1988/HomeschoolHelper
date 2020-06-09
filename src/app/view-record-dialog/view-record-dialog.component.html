@@ -1,0 +1,39 @@
+<div class="container">
+    <h2 mat-dialog-title>Record Data</h2>
+    <mat-dialog-content class="mat-typography">
+    <h3>{{record.studentName}}</h3>
+
+    <mat-divider></mat-divider>
+
+    <table>
+        <tr>
+            <td><strong>Subject:</strong></td>
+            <td>{{record.subjectName}}</td>
+        </tr>
+
+        <tr>
+            <td><strong>Date:</strong></td>
+            <td>{{formatDate(record.date)}}</td>
+        </tr>
+
+        <tr>
+            <td><strong>Hours:</strong></td>
+            <td>{{record.hours}} Hours {{record.minutes}} Mins </td>
+        </tr>
+    </table>
+ 
+    <mat-divider></mat-divider>
+    <br>
+
+    <p *ngIf="record.notes">
+        <strong>Notes:</strong> {{record.notes}}
+    </p>
+
+    <p *ngIf="!record.notes">
+        <strong>Notes:</strong> none
+    </p>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial color="primary">Done</button>
+    </mat-dialog-actions>
+</div>

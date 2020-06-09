@@ -1,0 +1,11 @@
+<!-- LOGGED IN -->
+<div class="container" *ngIf="user.loggedIn">
+    <h1>Welcome, {{ user.name }}!</h1>
+
+    <span>
+        <p>Homeschool Helper makes it simple to record your homeschool hours.</p>
+       <p>Check out the <a routerLink="/dashboard">dashboard</a> to view or export your data.</p>
+     
+
+    </span>
+</div>

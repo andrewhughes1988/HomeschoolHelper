@@ -1,0 +1,60 @@
+<mat-card>
+    <mat-card-title>New Record</mat-card-title>
+
+    <mat-form-field>
+        <mat-label>Student</mat-label>
+        <mat-select [(value)]="selectedStudentId">
+            <mat-option *ngFor="let student of students" [value]="student.id">{{ student.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+        <mat-label>Subject</mat-label>
+        <mat-select [(value)]="selectedSubjectId">
+            <mat-option *ngFor="let subject of subjects" [value]="subject.id">{{ subject.name }}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="date">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+        <input matInput type="number" placeholder="0" [(ngModel)]="hours">
+        <mat-label>Hours</mat-label>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+        <input matInput type="number" placeholder="0" [(ngModel)]="minutes">
+        <mat-label>Minutes</mat-label>
+    </mat-form-field>
+
+    <br><br>
+
+    <mat-form-field>
+        <mat-label>Notes</mat-label>
+        <textarea matInput rows="5" [(ngModel)]="notes"></textarea>
+        <mat-hint>Record any notes you want to keep about today's lesson.</mat-hint>
+    </mat-form-field>
+
+    <br><br><br><br>
+
+    <button mat-raised-button color="accent" (click)="submit()">Save</button>
+
+    <br><br>
+
+    <p>{{ message }}</p>
+
+</mat-card>
+       

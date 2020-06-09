@@ -1,0 +1,17 @@
+<mat-card>
+    <mat-card-title>New Student</mat-card-title>
+
+    <mat-form-field>
+        <mat-label>Student Name</mat-label>
+        <input required matInput type="text" [(ngModel)]="name">
+    </mat-form-field>
+
+    <br><br>
+
+    <button [disabled]="!this.name" mat-raised-button color="accent" (click)="submit()">Save</button>
+
+    <br><br>
+
+    <p>{{ message }}</p>
+
+</mat-card>
