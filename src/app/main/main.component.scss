@@ -179,3 +179,23 @@ svg {
   }
 
 }
+
+@media only screen and (max-height: 599px) {
+
+  .navbar {
+    margin-bottom: 10px;
+  }
+
+
+}
+
+
+@media only screen and (max-height: 799px) {
+
+  .navbar {
+    padding-top: 30px;
+    margin-bottom: 40px;
+  }
+
+
+}

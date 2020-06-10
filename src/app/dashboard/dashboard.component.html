@@ -31,7 +31,7 @@
             </mat-card-header>
 
             <mat-divider></mat-divider>
-            <mat-card-content *ngIf="students.length > 0; else no_students_content">
+            <mat-card-content *ngIf="hasStudents; else no_students_content">
                 <mat-list role="list">
                     <mat-list-item role="listitem" *ngFor="let student of students">
                         <div class=student-list>
@@ -50,7 +50,7 @@
             <mat-card-header >
                 <mat-card-title>Subjects</mat-card-title>
             </mat-card-header>
-            <mat-card-content *ngIf="subjects.length > 0; else no_subjects_content">
+            <mat-card-content *ngIf="hasSubjects; else no_subjects_content">
                 <mat-list role="list">
                     <mat-list-item role="listitem" *ngFor="let subject of subjects">
                         <div class=subject-list>
@@ -68,7 +68,7 @@
         </mat-card>
     </div>
 
-    <div class="container record-table-container" *ngIf="records.length > 0; else no_records_content">
+    <div class="container record-table-container" *ngIf="hasRecords; else no_records_content">
         <span class="records-table-heading">
             <h2>Records</h2>
             <button class="export-button" mat-button (click)="savePDF()">Export <mat-icon>get_app</mat-icon></button>
@@ -197,15 +197,17 @@
 </ng-template>
 
 <ng-template #no_records_content>
-    <mat-card class="no-record-card">
-        <mat-card-header >
-            <mat-card-title>Records</mat-card-title>
-        </mat-card-header>
+    <div class="container">
+        <mat-card class="no-record-card">
+            <mat-card-header >
+                <mat-card-title>Records</mat-card-title>
+            </mat-card-header>
 
-        <mat-divider></mat-divider>
-        <mat-card-content>
-            <h4>You haven't added any record yet.</h4>
-            <p>Add a new record <a routerLink="/new-record">here</a></p>
-        </mat-card-content>
-    </mat-card>
+            <mat-divider></mat-divider>
+            <mat-card-content>
+                <h4>You haven't added any records yet.</h4>
+                <p>Add a new record <a routerLink="/new-record">here</a></p>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </ng-template>

@@ -34,23 +34,42 @@ export class UserDataService implements OnInit {
         this.user.id = parseInt(user_data.nameid);
         this.user.name = user_data.given_name;
 
-        await axios.get('http://localhost:5000/student/all', {headers: {'Authorization': `Bearer ${token}`} })
-          .then(res => this.students = res.data.data)
+        await axios.get('https://homeschoolhelper.azurewebsites.net/student/all', {headers: {'Authorization': `Bearer ${token}`} })
+          .then(res => 
+            {
+              if(res.data.data) {
+                this.students = res.data.data.map(student =>
+                  new Student(student.id, student.name)
+                )
+              }
+            }
+          )
           .catch();
 
-        await axios.get('http://localhost:5000/subject/all', {headers: {'Authorization': `Bearer ${token}`} })
-          .then(res => this.subjects = res.data.data)
+        await axios.get('https://homeschoolhelper.azurewebsites.net/subject/all', {headers: {'Authorization': `Bearer ${token}`} })
+        .then(res => 
+          {
+            if(res.data.data) {
+              this.subjects = res.data.data.map(subject =>
+                new Subject(subject.id, subject.name, subject.isCore)
+              )
+            }
+          }
+        )
           .catch();
 
-        await axios.get('http://localhost:5000/record/all', {headers: {'Authorization': `Bearer ${token}`} })
+        await axios.get('https://homeschoolhelper.azurewebsites.net/record/all', {headers: {'Authorization': `Bearer ${token}`} })
           .then(res => {
-            this.records = res.data.data.map(record => {
-              let studentName = this.get_student_by_id(record.studentId).name;
-              let subjectName = this.get_subject_by_id(record.subjectId).name;
+            if(res.data.data) {
 
-              return new Record(record.id, record.studentId, studentName, 
-                    record.subjectId, subjectName, record.hours, record.minutes, record.date, record.notes);
-            })
+              this.records = res.data.data.map(record => {
+                let studentName = this.get_student_by_id(record.studentId).name;
+                let subjectName = this.get_subject_by_id(record.subjectId).name;
+
+                return new Record(record.id, record.studentId, studentName, 
+                      record.subjectId, subjectName, record.hours, record.minutes, record.date, record.notes);
+              })
+            }
           })
           .catch();
         
@@ -69,7 +88,7 @@ export class UserDataService implements OnInit {
 
     let response = null;
 
-    await axios.post('http://localhost:5000/authentication/login', {email, password})
+    await axios.post('https://homeschoolhelper.azurewebsites.net/authentication/login', {email, password})
 
     .then(res => {
       response = res.data;
@@ -99,7 +118,7 @@ export class UserDataService implements OnInit {
 
     let response = null;
 
-    await axios.post('http://localhost:5000/authentication/register', {name, email, password})
+    await axios.post('https://homeschoolhelper.azurewebsites.net/authentication/register', {name, email, password})
 
     .then(res => { response = res.data;})
 
@@ -121,7 +140,7 @@ export class UserDataService implements OnInit {
     let response = null;
     date = new Date(date);
 
-    await axios.post('http://localhost:5000/record', {studentId, subjectId, hours, minutes, date, notes}, {headers: {'Authorization': `Bearer ${this.user.token}`}})
+    await axios.post('https://homeschoolhelper.azurewebsites.net/record', {studentId, subjectId, hours, minutes, date, notes}, {headers: {'Authorization': `Bearer ${this.user.token}`}})
 
     .then(res => { response = res.data;})
 
@@ -135,7 +154,7 @@ export class UserDataService implements OnInit {
   async add_student(name) {
     let response = null;
 
-    await axios.post('http://localhost:5000/student', {name}, {headers: {'Authorization': `Bearer ${this.user.token}`}})
+    await axios.post('https://homeschoolhelper.azurewebsites.net/student', {name}, {headers: {'Authorization': `Bearer ${this.user.token}`}})
 
     .then(res => { response = res.data;})
 
@@ -150,7 +169,7 @@ export class UserDataService implements OnInit {
   async add_subject(name, isCore){
     let response = null;
 
-    await axios.post('http://localhost:5000/subject', {name, isCore}, {headers: {'Authorization': `Bearer ${this.user.token}`}})
+    await axios.post('https://homeschoolhelper.azurewebsites.net/subject', {name, isCore}, {headers: {'Authorization': `Bearer ${this.user.token}`}})
 
     .then(res => { response = res.data; })
 
@@ -164,7 +183,7 @@ export class UserDataService implements OnInit {
   async delete_record(id: number){
     let response = null;
 
-    await axios.delete(`http://localhost:5000/record/${id}`, {
+    await axios.delete(`https://homeschoolhelper.azurewebsites.net/record/${id}`, {
       headers: { 'Authorization': `Bearer ${this.user.token}`}
       
     })
@@ -180,7 +199,7 @@ export class UserDataService implements OnInit {
   async delete_student(id: number){
     let response = null;
 
-    await axios.delete(`http://localhost:5000/student/${id}`, {
+    await axios.delete(`https://homeschoolhelper.azurewebsites.net/student/${id}`, {
       headers: { 'Authorization': `Bearer ${this.user.token}`}
       
     })
@@ -195,7 +214,7 @@ export class UserDataService implements OnInit {
   async delete_subject(id: number){
     let response = null;
 
-    await axios.delete(`http://localhost:5000/subject/${id}`, {
+    await axios.delete(`https://homeschoolhelper.azurewebsites.net/subject/${id}`, {
       headers: { 'Authorization': `Bearer ${this.user.token}`}
       
     })

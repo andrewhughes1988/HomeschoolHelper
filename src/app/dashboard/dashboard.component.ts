@@ -80,6 +80,9 @@ export class DashboardComponent implements OnInit {
   students: Array<Student> = [];
   subjects: Array<Subject> = []
   records: Array<Record> = [];
+  hasStudents:boolean = false;
+  hasSubjects:boolean = false;
+  hasRecords:boolean = false;
   public recordDate;
   public filteredRecords: Array<Record>;
 
@@ -94,7 +97,6 @@ export class DashboardComponent implements OnInit {
     }
     else {
       this.getUserData();
-      this.recordDate;
     }
   }
 
@@ -195,8 +197,14 @@ export class DashboardComponent implements OnInit {
     this.students = this.userDataService.get_students();
     this.subjects = this.userDataService.get_subjects();
     this.records = this.userDataService.get_records();
-    this.records = this.records.reverse();
-    this.loadChartData();
+
+    this.hasStudents = (Array.isArray(this.students) && this.students.length > 0);
+    this.hasSubjects = (Array.isArray(this.subjects) && this.subjects.length > 0);
+    this.hasRecords = (Array.isArray(this.records) && this.records.length > 0);
+    if(this.hasRecords) {
+      this.records = this.records.reverse();
+      this.loadChartData();
+    }
 
     if(this.table) {
       this.table.renderRows();
